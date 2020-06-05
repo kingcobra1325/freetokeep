@@ -88,7 +88,7 @@ post==2019.4.13
 prometheus-client==0.7.1
 prompt-toolkit==2.0.10
 Protego==0.1.16
-psutil==5.6.3
+psutil==5.6.6
 psycopg2==2.8.5
 public==2019.4.13
 py==1.8.0
