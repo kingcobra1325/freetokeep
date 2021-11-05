@@ -37,30 +37,40 @@ def update_steam_json(gamelist=None):
 #################################################
 
 def steam_parse(gameappid):
-
+    valid = False
+    retry = 0
     while True:
         try:
             sleep(2)
             r = requests.get(f'http://store.steampowered.com/api/appdetails?appids={gameappid}').json()[f'{gameappid}']
+            valid = True
             break
         except Exception as e:
             print(f'{gameappid} App ID')
             print(e)
-            print('Error parsing. Retrying...')
-    if r['success']:
-        if r['data']['type'] == 'game':
-            try:
-                discount = r['data']['price_overview']['discount_percent']
-                if discount == 100:
-                    game_link =  f'https://store.steampowered.com/app/{gameappid}'
-                    game_name = r['data']['name']
-                    game_desc = r['data']['about_the_game']
-                    game_image = r['data']['header_image']
-                    free_till_raw = BeautifulSoup(requests.get(f'https://store.steampowered.com/app/{gameappid}').text,features="lxml").find('p',class_='game_purchase_discount_quantity').text.split('\t')[0]
-                    print(f'{game_link}\n{game_name}\n{game_desc}\n{game_image}\n{free_till_raw}')
-                    free_game_db(game_link,game_name,game_image,game_desc,free_till_raw,source = "Steam Store")
-            except KeyError:
-                pass
+            if retry < 100:
+                retry+=1
+                print(f'Error parsing. Retrying... (Attempt:{retry})')
+            else:
+                print(f'Skipping {gameappid}  App ID')
+                break
+    if valid:
+        if r['success']:
+            if r['data']['type'] == 'game':
+                try:
+                    discount = r['data']['price_overview']['discount_percent']
+                    if discount == 100:
+                        game_link =  f'https://store.steampowered.com/app/{gameappid}'
+                        game_name = r['data']['name']
+                        game_desc = r['data']['about_the_game']
+                        game_image = r['data']['header_image']
+                        free_till_raw = BeautifulSoup(requests.get(f'https://store.steampowered.com/app/{gameappid}').text,features="lxml").find('p',class_='game_purchase_discount_quantity').text.split('\t')[0]
+                        print(f'{game_link}\n{game_name}\n{game_desc}\n{game_image}\n{free_till_raw}')
+                        free_game_db(game_link,game_name,game_image,game_desc,free_till_raw,source = "Steam Store")
+                except KeyError:
+                    pass
+                except AttributeError as e:
+                    print(f'{e}: Error for Steam Game ID {gameappid}')
 
 # WORKER
 def steam_worker():
@@ -74,8 +84,12 @@ def steam_worker():
         #####################
         try:
             x = dbx.files_download_to_file('steam-game-list.json','/steam_game_list.json')
-        except ApiError:
+        except (ApiError,AttributeError):
             print('No existing Steam Game list found!')
+            try:
+                os.remove('steam-game-list.json')
+            except FileNotFoundError:
+                pass
         #####################
         # CREATE OR LOAD STEAM FILE
         #####################

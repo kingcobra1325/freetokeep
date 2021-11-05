@@ -1,0 +1,110 @@
+<!-- CREATED BY: JOHN EARL COBAR -->
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Free To Keep Games</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+    <script  src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+<!-- ######## JQUERY SCRIPT ########## -->
+<script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+<!-- ################################# -->
+
+  </head>
+  <body>
+
+    <!-- ALERT OVERHEAD -->
+    <div class="pos-f-t">
+      <div class="alert-container">
+        <div id="result">
+
+        </div>
+      </div>
+
+      <!-- NAVBAR -->
+      <nav class="navbar navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="https://free-to-keep-gui.herokuapp.com/">Keep Games for Free!</a>
+        <ul class="nav nav-pills">
+          <li class="nav-item dropdown">
+            <a class="nav-link navbar-toggler" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="navbar-toggler-icon"></span></a>
+            <div class="dropdown-menu dropdown-menu-right text-right bg-dark p-4">
+              <button class="dropdown-item active btn-success text-center rounded-left rounded-right" data-toggle="modal" data-target="#EmailRegister">Notify Me</button>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item active btn-danger text-center rounded-left rounded-right" data-toggle="modal" data-target="#EmailDelete">Remove my Email</button>
+            </div>
+          </li>
+      </nav>
+    </div>
+    <br>
+    <br>
+    <br>
+    <!-- GAME LIST -->
+    <div class="container">
+      <div id="gamelist">
+        <div class="d-flex justify-content-center align-middle" id="init">
+          <div class="spinner-border" style="width: 10rem; height: 10rem;" role="status">
+          <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  <!-- ############################ MODAL SECTION ############################### -->
+
+<!-- REGISTER -->
+
+  <div class="modal fade" id="EmailRegister" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="background-color:black;" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Register Email</h5>
+      </div>
+      <div class="modal-body">
+        <h6>Be notified when new games are available</h6>
+        {{formR.hidden_tag()}}
+        {{formR.formemail(class="form-control",placeholder="example@mail.com",id="EmailRegisterIDValue")}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="EmailRegisterIDLoader" style="display:none;width:30%;" class="btn btn-success" disabled><span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span></button>
+        {{formR.submit(class="btn btn-success",id="EmailRegisterID",style="width:30%;")}}
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="EmailRegisterClose">Close</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<!-- DELETE -->
+
+<div class="modal fade" id="EmailDelete" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="background-color:black;" data-backdrop="static">
+<div class="modal-dialog">
+  <div class="modal-content bg-dark">
+    <div class="modal-header">
+      <h5 class="modal-title" id="staticBackdropLabel">Delete Email</h5>
+    </div>
+    <div class="modal-body">
+      <h6>Enter your email to stop receiving notifications</h6>
+      {{formD.hidden_tag()}}
+      {{formD.formemail(class="form-control",placeholder="example@mail.com",id="EmailDeleteIDValue")}}
+    </div>
+    <div class="modal-footer">
+      <button type="button" id="EmailDeleteIDLoader" style="display:none;width:30%;" class="btn btn-danger" disabled><span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span></button>
+      {{formD.submit(class="btn btn-danger",id="EmailDeleteID",style="width:30%;")}}
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" id="EmailDeleteClose">Close</button>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+  <!-- ############################################################################ -->
+  </body>
+</html>

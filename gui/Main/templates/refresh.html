@@ -1,0 +1,113 @@
+{% for game in Games %}
+<!-- EXTRA LARGE -->
+<div class="card row justify-content-center d-none d-xl-block">
+    <div class="card-body">
+      <h4 class="card-title row justify-content-center"><a href="{{game.Link}}" class="btn btn-dark" style="width:100%;margin-top:-1.5%;font-size:20px;font-weight: bold;">{{game.Name}}</a></h4>
+      <div class="row">
+        <div class="col-2">
+            <img src="{{game.Image}}" alt="" class="img-fluid rounded float-left border-dark" style="width: 200px; height: 100px;vertical-align: middle;">
+        </div>
+        <div class="col-7">
+          <p>{{game.Desc|safe}}</p>
+          <!-- <p>{{game.Desc}}</p> -->
+        </div>
+        <div class="col justify-content-center" style="width: 12.499999995%;flex: 0 0 12.499%;max-width: 12.499%;">
+          <p style="color:gray;">Free Till:</p>
+          <p style="font-weight: bold;color:red;">{{game.Till}}</p>
+          <p></p>
+        </div>
+        <div class="col" style="width: 12.499999995%;flex: 0 0 12.499%;max-width: 12.499%;">
+          <a class="btn btn-secondary" href="{{game.Link}}" role="button"  style="margin-left: 15%;">
+          {% if game.Source == "Steam Store" %}
+              <img src="{{ url_for('static',filename='steamlogo3.png') }}" alt="" style="width: 75px; height: 108px;">
+          {% elif game.Source == "Epic Games Store" %}
+              <img src="{{ url_for('static',filename='egslogo5.png') }}" alt="" style="width: 75px; height: 108px;">
+          {% endif %}
+          </a>
+      </div>
+      </div>
+    </div>
+</div>
+<!-- LARGE -->
+<div class="card row justify-content-center d-none d-lg-block d-xl-none">
+    <div class="card-body">
+      <h4 class="card-title row justify-content-center"><a href="{{game.Link}}" class="btn btn-dark" style="width:100%;margin-top:-1.5%;font-size:20px;font-weight: bold;">{{game.Name}}</a></h4>
+      <div class="row">
+        <div class="col-2">
+            <img src="{{game.Image}}" alt="" class="img-fluid rounded float-left border-dark" style="width: 200px; height: 100px;vertical-align: middle;">
+        </div>
+        <div class="col-7">
+          <p>{{game.Desc|safe}}</p>
+          <!-- <p>{{game.Desc}}</p> -->
+        </div>
+        <div class="col justify-content-center" style="width: 12.499999995%;flex: 0 0 12.499%;max-width: 12.499%;">
+          <p style="color:gray;">Free Till:</p>
+          <p style="font-weight: bold;color:red;">{{game.Till}}</p>
+          <p></p>
+        </div>
+        <div class="col" style="width: 12.499999995%;flex: 0 0 12.499%;max-width: 12.499%;">
+          <a class="btn btn-secondary" href="{{game.Link}}" role="button" style="margin-left: -5%;">
+          {% if game.Source == "Steam Store" %}
+              <img src="{{ url_for('static',filename='steamlogo3.png') }}" alt="" style="width: 75px; height: 108px;">
+          {% elif game.Source == "Epic Games Store" %}
+              <img src="{{ url_for('static',filename='egslogo5.png') }}" alt="" style="width: 75px; height: 108px;">
+          {% endif %}
+          </a>
+      </div>
+      </div>
+    </div>
+</div>
+<!-- MEDIUM -->
+<div class="card row justify-content-center d-none d-md-block d-lg-none">
+    <div class="card-body">
+      <h4 class="card-title row justify-content-center"><a href="{{game.Link}}" class="btn btn-dark" style="width:100%;margin-top:-1.5%;font-size:20px;font-weight: bold;">{{game.Name}}</a></h4>
+      <div class="row">
+        <div class="col-2">
+            <img src="{{game.Image}}" alt="" class="img-fluid rounded float-left border-dark" style="width: 200px; height: 100px;vertical-align: middle;">
+        </div>
+        <div class="col-8">
+          <p>{{game.Desc|safe}}</p>
+          <p><span style="color:gray;">Free Till: </span>
+          <span style="font-weight: bold;color:red;">{{game.Till}}</span></p>
+          <!-- <p>{{game.Desc}}</p> -->
+        </div>
+        <div class="col" style="width: 12.499999995%;flex: 0 0 12.499%;max-width: 12.499%;">
+          <a class="btn btn-secondary justify-content-start" href="{{game.Link}}" role="button">
+          {% if game.Source == "Steam Store" %}
+              <img src="{{ url_for('static',filename='steamlogo3.png') }}" alt="" style="width: 75px; height: 108px;">
+          {% elif game.Source == "Epic Games Store" %}
+              <img src="{{ url_for('static',filename='egslogo5.png') }}" alt="" style="width: 75px; height: 108px;">
+          {% endif %}
+          </a>
+      </div>
+      </div>
+    </div>
+</div>
+<!-- SMALL -->
+<div class="card row justify-content-center d-md-none">
+    <div class="card-body">
+      <h4 class="card-title row justify-content-center"><a href="{{game.Link}}" class="btn btn-dark" style="width:100%;margin-top:-1.5%;font-size:20px;font-weight: bold;">{{game.Name}}</a></h4>
+      <div class="row">
+          <img src="{{game.Image}}" alt="" class="img-fluid rounded border-dark center-block" style="width: 460px; height: 215px;vertical-align: middle;">
+      </div>
+      <div class="row" style="margin-top:5%;">
+        <div class="col-3 justify-content-start">
+          <a class="btn btn-secondary" href="{{game.Link}}" role="button" style="margin-left:-2%;">
+          {% if game.Source == "Steam Store" %}
+              <img src="{{ url_for('static',filename='steamlogo3.png') }}" alt="" style="width: 75px; height: 108px;">
+          {% elif game.Source == "Epic Games Store" %}
+              <img src="{{ url_for('static',filename='egslogo5.png') }}" alt="" style="width: 75px; height: 108px;">
+          {% endif %}
+          </a>
+        </div>
+        <div class="col-1">
+
+        </div>
+        <div class="col-7 justify-content-end">
+          <p><span style="color:gray;">Free Till: </span><span style="font-weight: bold;color:red;">{{game.Till}}</span></p>
+          <p>{{game.Desc|safe}}</p>
+        </div>
+      </div>
+    </div>
+</div>
+{% endfor %}

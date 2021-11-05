@@ -8,5 +8,10 @@ from time import sleep
 def pinger_worker():
     print('Starting pinger')
     while True:
-        requests.get('https://free-to-keep.herokuapp.com/')
+        while True:
+            try:
+                requests.get('https://free-to-keep.herokuapp.com/')
+                break
+            except Exception as e:
+                print(e)
         sleep(1500)
