@@ -10,7 +10,7 @@ cryptography==3.1.1
 Cython==0.29.21
 cytoolz==0.11.0
 datetime==4.3
-dask==2.30.0
+dask==2021.10.0
 decorator==4.4.2
 docutils==0.16
 dropbox==11.9.0
